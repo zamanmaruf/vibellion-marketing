@@ -41,7 +41,7 @@ export function Hero() {
               variant="outline"
               className="border-2 border-frost-white text-frost-white hover:bg-frost-white/10 text-base px-8 py-6"
             >
-              <Link href="/resources">{siteContent.brand.secondaryCTA}</Link>
+              <Link href="/pricing">{siteContent.brand.secondaryCTA}</Link>
             </Button>
           </div>
 

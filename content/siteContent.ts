@@ -4,7 +4,7 @@ export const siteContent = {
     tagline: "Social & promos that fill seats.",
     description: "We run your restaurant's content, promotions, and brand rules so you stay consistent and get more reservations and repeat customers.",
     primaryCTA: "Book Free Social Audit",
-    secondaryCTA: "See Results",
+    secondaryCTA: "Pricing",
     trustChips: [
       "Food-only",
       "Weekly promo calendar",

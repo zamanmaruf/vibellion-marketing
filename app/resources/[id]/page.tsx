@@ -157,22 +157,25 @@ export default async function ResourcePage({ params }: Props) {
                 <div className="mt-12 pt-8 border-t border-border">
                   <h2 className="text-2xl font-serif font-bold text-primary mb-4">References</h2>
                   <ul className="space-y-2">
-                    {resource.content.references.map((ref, index) => (
-                      <li key={index} className="text-text/80">
-                        {ref.url ? (
-                          <a
-                            href={ref.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-primary hover:underline"
-                          >
-                            {ref.title}
-                          </a>
-                        ) : (
-                          <span>{ref.title}</span>
-                        )}
-                      </li>
-                    ))}
+                    {resource.content.references.map((ref, index) => {
+                      const reference = ref as { title: string; url?: string };
+                      return (
+                        <li key={index} className="text-text/80">
+                          {reference.url ? (
+                            <a
+                              href={reference.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-primary hover:underline"
+                            >
+                              {reference.title}
+                            </a>
+                          ) : (
+                            <span>{reference.title}</span>
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               )}

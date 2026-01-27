@@ -222,7 +222,9 @@ export default async function ResourcePage({ params }: Props) {
               Book your free social audit and let's discuss how we can help your restaurant grow.
             </p>
             <Button asChild size="lg" className="bg-primary text-background hover:bg-primary/90">
-              <Link href="/contact">Book Free Social Audit</Link>
+              <a href={siteContent.contact.calendlyUrl} target="_blank" rel="noopener noreferrer">
+                Book Free Social Audit
+              </a>
             </Button>
           </div>
         </article>

@@ -41,7 +41,9 @@ export function Header() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
             <Button asChild className="bg-primary text-background hover:bg-primary/90">
-              <Link href="/contact">{siteContent.brand.primaryCTA}</Link>
+              <a href={siteContent.contact.calendlyUrl} target="_blank" rel="noopener noreferrer">
+                {siteContent.brand.primaryCTA}
+              </a>
             </Button>
           </div>
 
@@ -77,9 +79,14 @@ export function Header() {
                 asChild
                 className="bg-primary text-background hover:bg-primary/90 w-full mt-4"
               >
-                <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+                <a
+                  href={siteContent.contact.calendlyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
                   {siteContent.brand.primaryCTA}
-                </Link>
+                </a>
               </Button>
             </nav>
           </div>

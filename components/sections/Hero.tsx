@@ -31,7 +31,9 @@ export function Hero() {
               size="lg"
               className="bg-primary text-background hover:bg-primary/90 text-base px-8 py-6"
             >
-              <Link href="/contact">{siteContent.brand.primaryCTA}</Link>
+              <a href={siteContent.contact.calendlyUrl} target="_blank" rel="noopener noreferrer">
+                {siteContent.brand.primaryCTA}
+              </a>
             </Button>
             <Button
               asChild

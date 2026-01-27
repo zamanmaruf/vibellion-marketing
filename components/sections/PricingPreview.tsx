@@ -10,9 +10,17 @@ import { ArrowRight } from "lucide-react";
 
 export function PricingPreview() {
   const previewTiers = siteContent.pricing.tiers;
+  const offer = siteContent.pricing.specialOffer;
 
   return (
     <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      {offer.active && (
+        <div className="mb-8 p-4 bg-primary/10 border-2 border-primary rounded-lg text-center max-w-2xl mx-auto">
+          <Badge className="bg-primary text-background mb-2">{offer.badgeText}</Badge>
+          <p className="text-lg font-semibold text-primary">{offer.title}</p>
+          <p className="text-sm text-frost-white mt-1">{offer.description}</p>
+        </div>
+      )}
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">
           Simple, Transparent Pricing

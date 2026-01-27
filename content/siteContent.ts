@@ -1004,6 +1004,15 @@ export const siteContent = {
     },
   ],
   pricing: {
+    specialOffer: {
+      active: true,
+      discount: 25,
+      discountText: "25% off",
+      title: "Limited Time Launch Offer",
+      description: "Get 25% off your first month. Offer ends in 30 days.",
+      endDate: "2026-02-26", // 30 days from now
+      badgeText: "Launch Special",
+    },
     valueBreakdown: {
       starter: {
         serviceValue: "$1,200-$2,200/month",
@@ -1119,6 +1128,10 @@ export const siteContent = {
       {
         question: "What if I need to pause service?",
         answer: "We offer flexible pausing options for seasonal businesses or temporary closures. Contact us to discuss your situation. We understand restaurant seasonality and work with you to maintain your marketing presence during peak seasons while pausing during slower periods.",
+      },
+      {
+        question: "What is the launch special offer?",
+        answer: "For a limited time, we're offering 25% off your first month on all plans. This launch special applies to new clients only and ends on February 26, 2026. After your first month, you'll be charged the regular monthly rate. This is our way of helping restaurants get started with professional marketing at a reduced initial investment.",
       },
     ],
     researchSources: [

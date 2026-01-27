@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 11 18 32;
+    --surface: 17 26 46;
+    --text: 245 241 232;
+    --primary: 240 248 255; /* Frost White #F0F8FF - using RGB values */
+    --secondary: 233 75 60;
+    --khaki: 240 248 255; /* Frost White #F0F8FF - using RGB values */
+    --olive: 240 248 255; /* Frost White #F0F8FF - using RGB values */
+    --frost-white: 240 248 255; /* Frost White #F0F8FF - using RGB values */
+    --color-frost: 240 248 255;
+    --frost-white-hex: #F0F8FF;
+    --border: 245 241 232 / 0.1;
+    --input: 245 241 232 / 0.05;
+    --ring: 240 248 255; /* Frost White #F0F8FF - using RGB values */
+    --radius: 1rem;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Inter', sans-serif;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply text-text antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: var(--font-sans);
+    background-image: url('/images/rest-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: hsl(var(--background) / 0.88);
+    z-index: -1;
+    pointer-events: none;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    background: transparent !important;
+    background-color: transparent !important;
+    font-weight: 700;
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Force text-primary to Frost White - utilities layer has higher priority */
+  .text-primary {
+    color: #F0F8FF !important;
+  }
+  
+  [class*="text-primary"] {
+    color: #F0F8FF !important;
+  }
+  
+  h1.text-primary,
+  h2.text-primary,
+  h3.text-primary,
+  h4.text-primary,
+  h5.text-primary,
+  h6.text-primary {
+    color: #F0F8FF !important;
+  }
+  
+  /* Force CardTitle with text-primary */
+  [class*="CardTitle"].text-primary {
+    color: #F0F8FF !important;
+  }
+  
+  /* Force font-serif with text-primary */
+  [class*="font-serif"].text-primary {
+    color: #F0F8FF !important;
+  }
+  
+  /* Force text-khaki to Frost White */
+  .text-khaki {
+    color: #F0F8FF !important;
+  }
+  
+  /* Force text-olive to Frost White */
+  .text-olive {
+    color: #F0F8FF !important;
+  }
+  
+  /* Force all spans with text-olive to Frost White */
+  span.text-olive {
+    color: #F0F8FF !important;
+  }
+  
+  /* Force labels to Frost White */
+  label {
+    color: #F0F8FF !important;
+  }
+  
+  /* Force placeholder text to Frost White */
+  input::placeholder,
+  textarea::placeholder {
+    color: #F0F8FF !important;
+    opacity: 0.7;
+  }
+  
+  /* Ensure input focus rings are Frost White */
+  input:focus-visible,
+  textarea:focus-visible {
+    --tw-ring-color: #F0F8FF !important;
+  }
+  
+  /* Force all text elements with khaki or olive to Frost White */
+  *[class*="text-khaki"],
+  *[class*="text-olive"] {
+    color: #F0F8FF !important;
+  }
+  
+  /* Force borders that use primary/khaki/olive to Frost White */
+  *[class*="border-primary"],
+  *[class*="border-khaki"],
+  *[class*="border-olive"] {
+    border-color: #F0F8FF !important;
+  }
+  
+  /* Force any inline styles or computed styles */
+  * {
+    --tw-text-opacity: 1;
+  }
+}
+
+/* Additional global overrides outside of layer for maximum specificity */
+*[class*="text-olive"],
+*[class*="text-khaki"],
+.text-olive,
+.text-khaki,
+span.text-olive,
+span.text-khaki,
+li .text-olive,
+li .text-khaki,
+li span.text-olive,
+li span.text-khaki {
+  color: #F0F8FF !important;
+}
+
+/* Override any potential yellow/lime colors in all elements */
+span[class*="olive"],
+span[class*="khaki"],
+li span[class*="olive"],
+li span[class*="khaki"],
+*[class*="olive"],
+*[class*="khaki"] {
+  color: #F0F8FF !important;
+}
+
+/* Force all checkmarks and bullet points */
+span:has-text("✓"),
+span:has-text("•"),
+li > span {
+  color: #F0F8FF !important;
+}
+
+/* Nuclear option - override everything that might be yellow/lime */
+* {
+  --color-khaki: #F0F8FF !important;
+  --color-olive: #F0F8FF !important;
+}
+
+/* Force text-frost-white to actually be frost white - MAXIMUM SPECIFICITY */
+.text-frost-white,
+html body .text-frost-white,
+html body *[class*="frost-white"],
+html body span.text-frost-white,
+html body li .text-frost-white,
+html body li span.text-frost-white,
+html body p.text-frost-white,
+html body div.text-frost-white,
+html body *[class*="text-frost-white"] {
+  color: #F0F8FF !important;
+  color: rgb(240, 248, 255) !important;
+}
+
+/* Direct color override for any element that might have yellow/lime */
+body * {
+  --tw-text-opacity: 1;
+}
+
+/* Override any computed styles that might be yellow */
+html body *[style*="color"] {
+  color: #F0F8FF !important;
+}

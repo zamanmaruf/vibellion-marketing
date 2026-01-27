@@ -39,16 +39,16 @@ export default function PricingPage() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Special Offer Banner */}
         {offer.active && (
-          <div className="mb-8 p-6 bg-primary/10 border-2 border-primary rounded-lg text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Badge className="bg-primary text-background text-sm px-3 py-1">
+          <div className="mb-12 p-6 bg-primary/20 border-2 border-primary rounded-lg text-center shadow-soft-lg">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-3 mb-3">
+              <Badge className="bg-primary text-background text-base px-4 py-1.5 font-semibold">
                 {offer.badgeText}
               </Badge>
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-primary">
                 {offer.title}
               </h2>
             </div>
-            <p className="text-lg text-frost-white">
+            <p className="text-lg md:text-xl text-frost-white font-medium">
               {offer.description}
             </p>
           </div>
@@ -79,30 +79,30 @@ export default function PricingPage() {
                     : "hover:border-primary/50"
                 } transition-all`}
               >
-                <div className="p-4 pb-0 flex items-start justify-between">
+                <div className="p-4 pb-0 flex items-start justify-between gap-2">
                   {tier.popular && (
                     <Badge className="bg-primary text-background">Most Popular</Badge>
                   )}
                   {showDiscount && (
-                    <Badge className="bg-secondary text-background ml-auto">
+                    <Badge className="bg-secondary text-background font-semibold">
                       {offer.discountText} Off
                     </Badge>
                   )}
                 </div>
                 <CardHeader>
                   <CardTitle className="font-serif text-2xl text-primary">{tier.name}</CardTitle>
-                  <CardDescription className="text-frost-white">{tier.description}</CardDescription>
+                  <CardDescription className="text-frost-white/90">{tier.description}</CardDescription>
                   <div className="mt-4">
                     {showDiscount ? (
                       <div className="space-y-1">
                         <div className="flex items-baseline gap-2">
-                          <span className="text-2xl font-serif font-bold text-text/40 line-through">
+                          <span className="text-2xl font-serif font-bold text-frost-white/60 line-through">
                             {tier.price}
                           </span>
                           <span className="text-4xl font-serif font-bold text-primary">
                             {discountedPrice}
                           </span>
-                          <span className="text-text/60 ml-2">{tier.period}</span>
+                          <span className="text-frost-white/80 ml-2">{tier.period}</span>
                         </div>
                         <p className="text-sm text-primary font-semibold">
                           First month only • Then {tier.price}/{tier.period.replace("per ", "")}
@@ -110,8 +110,8 @@ export default function PricingPage() {
                       </div>
                     ) : (
                       <>
-                        <span className="text-4xl font-serif font-bold text-text">{tier.price}</span>
-                        <span className="text-text/60 ml-2">{tier.period}</span>
+                        <span className="text-4xl font-serif font-bold text-frost-white">{tier.price}</span>
+                        <span className="text-frost-white/80 ml-2">{tier.period}</span>
                       </>
                     )}
                   </div>
@@ -119,9 +119,9 @@ export default function PricingPage() {
               <CardContent className="flex-1 flex flex-col">
                 <ul className="space-y-3 mb-6 flex-1">
                   {tier.features.map((feature, idx) => (
-                    <li key={idx} className="text-sm text-text/80 flex items-start">
-                      <span className="mr-2" style={{ color: '#F0F8FF' }}>✓</span>
-                      {feature}
+                    <li key={idx} className="text-sm text-frost-white flex items-start">
+                      <span className="mr-2 text-frost-white">✓</span>
+                      <span className="text-frost-white">{feature}</span>
                     </li>
                   ))}
                 </ul>

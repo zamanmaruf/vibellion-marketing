@@ -9,12 +9,16 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+  fallback: ["system-ui", "arial"],
+  preload: true,
 });
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-serif",
   display: "swap",
+  fallback: ["Georgia", "serif"],
+  preload: true,
 });
 
 export const metadata: Metadata = {

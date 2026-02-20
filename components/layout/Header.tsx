@@ -6,6 +6,7 @@ import { siteContent } from "@/content/siteContent";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { trackCalendlyClick, trackCtaClick } from "@/lib/analytics";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -40,8 +41,20 @@ export function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button asChild className="bg-primary text-background hover:bg-primary/90">
-              <a href={siteContent.contact.calendlyUrl} target="_blank" rel="noopener noreferrer">
+            <Button asChild className="bg-primary text-background hover:bg-primary/90 font-semibold">
+              <a
+                href={siteContent.contact.calendlyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  trackCtaClick({
+                    location: "header",
+                    label: siteContent.brand.primaryCTA,
+                    destination: siteContent.contact.calendlyUrl,
+                  });
+                  trackCalendlyClick({ location: "header" });
+                }}
+              >
                 {siteContent.brand.primaryCTA}
               </a>
             </Button>
@@ -83,7 +96,15 @@ export function Header() {
                   href={siteContent.contact.calendlyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    trackCtaClick({
+                      location: "mobile_menu",
+                      label: siteContent.brand.primaryCTA,
+                      destination: siteContent.contact.calendlyUrl,
+                    });
+                    trackCalendlyClick({ location: "mobile_menu" });
+                  }}
                 >
                   {siteContent.brand.primaryCTA}
                 </a>

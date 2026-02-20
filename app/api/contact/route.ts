@@ -1,19 +1,36 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import * as z from "zod";
 import { siteContent } from "@/content/siteContent";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const contactPayloadSchema = z.object({
+  name: z.string().min(2),
+  restaurantName: z.string().min(2),
+  location: z.string().optional(),
+  email: z.string().email(),
+  phone: z.string().optional(),
+  message: z.string().min(10),
+  website: z.string().optional(),
+});
+
 export async function POST(request: NextRequest) {
   try {
-    const data = await request.json();
+    const payload = await request.json();
+    const parsed = contactPayloadSchema.safeParse(payload);
 
-    // Validate required fields
-    if (!data.name || !data.email || !data.message) {
+    if (!parsed.success) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
       );
+    }
+
+    const data = parsed.data;
+
+    if (data.website && data.website.trim().length > 0) {
+      return NextResponse.json({ message: "Email sent successfully" }, { status: 200 });
     }
 
     // Check if Resend API key is configured
@@ -46,7 +63,7 @@ You can reply directly to this email to respond to ${data.name} at ${data.email}
 
     // Send email using Resend
     const { data: emailData, error } = await resend.emails.send({
-      from: "Vibellion Marketing <onboarding@resend.dev>", // Update this with your verified domain
+      from: "Vibellion Marketing <onboarding@resend.dev>",
       to: [siteContent.contact.email],
       replyTo: data.email,
       subject: emailSubject,

@@ -13,7 +13,7 @@ export function FinalCTA() {
           Ready to Fill More Seats?
         </h2>
         <p className="text-lg text-frost-white max-w-2xl mx-auto">
-          Book your free social audit and see how we can help your restaurant grow
+          Book a pilot fit call and see how we can help your restaurant grow
         </p>
       </div>
 

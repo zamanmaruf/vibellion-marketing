@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
+import { trackFaqExpand } from "@/lib/analytics";
 
 export function FAQ() {
   return (
@@ -29,7 +30,21 @@ export function FAQ() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Accordion type="single" collapsible className="w-full space-y-4">
+            <Accordion
+              type="single"
+              collapsible
+              className="w-full space-y-4"
+              onValueChange={(value) => {
+                if (!value) {
+                  return;
+                }
+                const index = Number(value.replace("item-", ""));
+                const item = siteContent.faq[index];
+                if (item) {
+                  trackFaqExpand({ question: item.question });
+                }
+              }}
+            >
               {siteContent.faq.map((item, index) => (
                 <AccordionItem
                   key={index}

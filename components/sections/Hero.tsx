@@ -4,24 +4,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { siteContent } from "@/content/siteContent";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { trackCalendlyClick, trackCtaClick } from "@/lib/analytics";
 
 export function Hero() {
   return (
     <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="space-y-8"
-        >
+        <div className="space-y-8">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-primary leading-tight">
             {siteContent.brand.tagline}
           </h1>
           <p className="text-lg md:text-xl text-frost-white leading-relaxed">
-            {siteContent.brand.description}
+            {siteContent.brand.heroOutcome}
           </p>
 
           {/* CTAs */}
@@ -31,7 +26,19 @@ export function Hero() {
               size="lg"
               className="bg-primary text-background hover:bg-primary/90 text-base px-8 py-6"
             >
-              <a href={siteContent.contact.calendlyUrl} target="_blank" rel="noopener noreferrer">
+              <a
+                href={siteContent.contact.calendlyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  trackCtaClick({
+                    location: "hero",
+                    label: siteContent.brand.primaryCTA,
+                    destination: siteContent.contact.calendlyUrl,
+                  });
+                  trackCalendlyClick({ location: "hero" });
+                }}
+              >
                 {siteContent.brand.primaryCTA}
               </a>
             </Button>
@@ -41,7 +48,18 @@ export function Hero() {
               variant="outline"
               className="border-2 border-frost-white text-frost-white hover:bg-frost-white/10 text-base px-8 py-6"
             >
-              <Link href="/pricing">{siteContent.brand.secondaryCTA}</Link>
+              <Link
+                href="/pricing"
+                onClick={() =>
+                  trackCtaClick({
+                    location: "hero",
+                    label: siteContent.brand.secondaryCTA,
+                    destination: "/pricing",
+                  })
+                }
+              >
+                {siteContent.brand.secondaryCTA}
+              </Link>
             </Button>
           </div>
 
@@ -56,23 +74,20 @@ export function Hero() {
               </span>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Right Image */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-soft-lg"
-        >
+        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-soft-lg">
           <Image
             src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop"
             alt="Restaurant interior"
             fill
             className="object-cover"
             priority
+            quality={80}
+            sizes="(max-width: 1024px) 100vw, 50vw"
           />
-        </motion.div>
+        </div>
       </div>
     </section>
   );

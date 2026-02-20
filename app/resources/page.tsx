@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Resources",
   description:
     "Tips, guides, and insights to help you grow your restaurant's marketing. Learn about social media, promotions, branding, and more.",
+  alternates: {
+    canonical: "/resources",
+  },
   openGraph: {
     title: "Resources | Vibellion Marketing",
     description: "Tips, guides, and insights for restaurant marketing.",
@@ -70,6 +73,23 @@ export default function ResourcesPage() {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        <div className="mt-12 rounded-xl border border-border bg-surface p-6 text-center">
+          <p className="text-text/80 mb-4">
+            Need help applying these ideas to your restaurant?
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Button asChild>
+              <Link href="/services">See Services</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/pricing">View Pricing</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/contact">Talk to Us</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

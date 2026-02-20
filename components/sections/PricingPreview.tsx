@@ -7,14 +7,17 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { isOfferCurrentlyActive } from "@/lib/offers";
+import { trackCtaClick, trackPricingView } from "@/lib/analytics";
 
 export function PricingPreview() {
   const previewTiers = siteContent.pricing.tiers;
   const offer = siteContent.pricing.specialOffer;
+  const isOfferActive = isOfferCurrentlyActive(offer);
 
   return (
     <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-      {offer.active && (
+      {isOfferActive && (
         <div className="mb-8 p-4 bg-primary/10 border-2 border-primary rounded-lg text-center max-w-2xl mx-auto">
           <Badge className="bg-primary text-background mb-2">{offer.badgeText}</Badge>
           <p className="text-lg font-semibold text-primary">{offer.title}</p>
@@ -45,6 +48,8 @@ export function PricingPreview() {
                   ? "border-primary border-2 shadow-soft-lg"
                   : "hover:border-primary/50"
               } transition-colors`}
+              onMouseEnter={() => trackPricingView({ tier: tier.id })}
+              onFocus={() => trackPricingView({ tier: tier.id })}
             >
               {tier.popular && (
                 <div className="p-4 pb-0">
@@ -75,7 +80,16 @@ export function PricingPreview() {
                   variant={tier.popular ? "default" : "outline"}
                   className={`w-full ${tier.popular ? "bg-primary text-background" : ""}`}
                 >
-                  <Link href="/pricing">
+                  <Link
+                    href="/pricing"
+                    onClick={() =>
+                      trackCtaClick({
+                        location: "pricing_preview",
+                        label: `Get Started - ${tier.name}`,
+                        destination: "/pricing",
+                      })
+                    }
+                  >
                     Get Started <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
@@ -87,7 +101,18 @@ export function PricingPreview() {
 
       <div className="text-center">
         <Button asChild size="lg" variant="outline">
-          <Link href="/pricing">View Full Pricing Details</Link>
+          <Link
+            href="/pricing"
+            onClick={() =>
+              trackCtaClick({
+                location: "pricing_preview",
+                label: "View Full Pricing Details",
+                destination: "/pricing",
+              })
+            }
+          >
+            View Full Pricing Details
+          </Link>
         </Button>
       </div>
     </section>

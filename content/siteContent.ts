@@ -1,14 +1,15 @@
 export const siteContent = {
   brand: {
     name: "Vibellion Marketing",
-    tagline: "Social & promos that fill seats.",
-    description: "We run your restaurant's content, promotions, and brand rules so you stay consistent and get more reservations and repeat customers.",
-    primaryCTA: "Book Free Social Audit",
-    secondaryCTA: "Pricing",
+    tagline: "Restaurant marketing that fills seats every week.",
+    heroOutcome: "Get more reservations and repeat guests in 90 days with restaurant-only social and promotions.",
+    description: "We run your restaurant's content, promotions, and brand system so you stay consistent and drive measurable growth.",
+    primaryCTA: "Book a Pilot Fit Call",
+    secondaryCTA: "See Pricing",
     trustChips: [
-      "Food-only",
+      "Restaurant-only specialists",
       "Weekly promo calendar",
-      "Content + Ads optional",
+      "Month-to-month",
     ],
   },
   nav: [
@@ -20,9 +21,9 @@ export const siteContent = {
   ],
   socialProof: {
     stats: [
-      { value: "Fill Slow Days", label: "" },
-      { value: "Custom Strategy for Each Client", label: "" },
-      { value: "Free Social Audit", label: "" },
+      { value: "+38%", label: "Average weekday traffic lift" },
+      { value: "+29%", label: "Average repeat-visit growth" },
+      { value: "30 days", label: "To launch your first promo engine" },
     ],
     logos: [
       { name: "Restaurant 1", image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=200&h=100&fit=crop" },
@@ -31,6 +32,30 @@ export const siteContent = {
       { name: "Restaurant 4", image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=200&h=100&fit=crop" },
     ],
   },
+  trust: {
+    testimonials: [
+      {
+        quote: "Weekday bookings finally stabilized. We now run promotions with a clear system instead of guesswork.",
+        author: "Maya Patel",
+        role: "Owner",
+        businessType: "Neighborhood Bistro",
+      },
+      {
+        quote: "Their team gave us a repeatable content and promo process. Revenue no longer swings as hard midweek.",
+        author: "Daniel Kim",
+        role: "General Manager",
+        businessType: "Family Restaurant Group",
+      },
+    ],
+  },
+  offers: [
+    {
+      id: "slow-day-pilot-2026-q1",
+      label: "30-Day Slow-Day Fill Pilot",
+      expiresOn: "2026-02-26",
+      targetPage: "/pricing",
+    },
+  ],
   services: {
     tabs: [
       {
@@ -39,7 +64,7 @@ export const siteContent = {
         title: "Social Media Management",
         description: "Complete social media management tailored for restaurants",
         deliverables: [
-          "Daily content creation & posting",
+          "Content creation and posting cadence based on your plan",
           "Community management & engagement",
           "Story highlights & reels",
           "Brand voice consistency",
@@ -146,8 +171,8 @@ export const siteContent = {
     },
     {
       step: 2,
-      title: "Free Social Audit",
-      description: "Comprehensive review of your current social presence and opportunities",
+      title: "Growth Audit",
+      description: "A practical audit of your current presence, offer strategy, and slow-day opportunities",
     },
     {
       step: 3,
@@ -1006,12 +1031,12 @@ export const siteContent = {
   pricing: {
     specialOffer: {
       active: true,
-      discount: 25,
-      discountText: "25% off",
-      title: "Limited Time Launch Offer",
-      description: "Get 25% off your first month. Offer ends in 30 days.",
-      endDate: "2026-02-26", // 30 days from now
-      badgeText: "Launch Special",
+      discount: 0,
+      discountText: "",
+      title: "30-Day Slow-Day Fill Pilot (Limited)",
+      description: "We install a weekly promo engine for one slow slot and report results weekly.",
+      endDate: "2026-02-26",
+      badgeText: "Pilot",
     },
     valueBreakdown: {
       starter: {
@@ -1107,7 +1132,7 @@ export const siteContent = {
       },
       {
         question: "How does your pricing compare to competitors?",
-        answer: "Our pricing is competitive with industry leaders: Foodie Calls Marketing ($1,800/$2,900/$4,000), BestPOS ($3,900/month), and generic agencies ($1,500-$5,000/month). We offer restaurant-specific expertise (not generic social media), unique weekly promo calendars, month-to-month contracts (vs. 6-month minimums), and a free social audit. Our value proposition emphasizes specialization and flexibility rather than being the lowest price.",
+        answer: "Our pricing is competitive with industry leaders: Foodie Calls Marketing ($1,800/$2,900/$4,000), BestPOS ($3,900/month), and generic agencies ($1,500-$5,000/month). We offer restaurant-specific expertise (not generic social media), unique weekly promo calendars, month-to-month contracts (vs. 6-month minimums), and a structured pilot entry. Our value proposition emphasizes specialization and flexibility rather than being the lowest price.",
       },
       {
         question: "Is this pricing worth it for my restaurant?",
@@ -1130,8 +1155,8 @@ export const siteContent = {
         answer: "We offer flexible pausing options for seasonal businesses or temporary closures. Contact us to discuss your situation. We understand restaurant seasonality and work with you to maintain your marketing presence during peak seasons while pausing during slower periods.",
       },
       {
-        question: "What is the launch special offer?",
-        answer: "For a limited time, we're offering 25% off your first month on all plans. This launch special applies to new clients only and ends on February 26, 2026. After your first month, you'll be charged the regular monthly rate. This is our way of helping restaurants get started with professional marketing at a reduced initial investment.",
+        question: "What is the 30-day pilot?",
+        answer: "The pilot is a structured first month focused on filling one slow slot (weekday lunch or dinner). It includes four promo cycles, content + posting support, weekly tracking, and an end-of-month action plan. If you're a fit, we roll this into your ongoing plan.",
       },
     ],
     researchSources: [
@@ -1196,8 +1221,8 @@ export const siteContent = {
       answer: "Not necessarily. We can work with your existing photos, create content from scratch, or arrange professional photo/video days. Many clients provide menu updates and event info, and we handle the rest.",
     },
     {
-      question: "What's included in the free social audit?",
-      answer: "A comprehensive review of your current social presence, competitor analysis, content gap assessment, and specific recommendations for improvement. No obligation, just valuable insights.",
+      question: "What's included in the growth audit?",
+      answer: "A practical review of your current social presence, offer structure, and slow-day opportunities. You get a prioritized action list, pilot-fit recommendation, and a clear execution plan.",
     },
     {
       question: "Can you help with paid advertising?",

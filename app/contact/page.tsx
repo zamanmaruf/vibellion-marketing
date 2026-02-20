@@ -8,7 +8,10 @@ import { Mail, Phone, MapPin } from "lucide-react";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with Vibellion Marketing. Book your free social audit or reach out with questions about our restaurant marketing services.",
+    "Get in touch with Vibellion Marketing. Book a pilot fit call or reach out with questions about our restaurant marketing services.",
+  alternates: {
+    canonical: "/contact",
+  },
   openGraph: {
     title: "Contact Us | Vibellion Marketing",
     description: "Get in touch with Vibellion Marketing.",
@@ -24,7 +27,10 @@ export default function ContactPage() {
             Get in Touch
           </h1>
           <p className="text-xl text-frost-white max-w-3xl mx-auto">
-            Ready to fill more seats? Book your free social audit or reach out with any questions.
+            Ready to fill more seats? Book a pilot fit call or reach out with any questions.
+          </p>
+          <p className="text-sm text-text/70 max-w-2xl mx-auto mt-3">
+            Restaurant-only marketing support, month-to-month terms, and weekly promotion planning.
           </p>
         </div>
 

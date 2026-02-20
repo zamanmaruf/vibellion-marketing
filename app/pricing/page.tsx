@@ -1,20 +1,25 @@
 import { Metadata } from "next";
-import Link from "next/link";
+import Script from "next/script";
 import { siteContent } from "@/content/siteContent";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { PricingTiers } from "@/components/sections/PricingTiers";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { isOfferCurrentlyActive } from "@/lib/offers";
 
 export const metadata: Metadata = {
   title: "Pricing",
   description:
     "Simple, transparent pricing for restaurants. Choose the plan that fits your needs. All plans are month-to-month with no long-term contracts.",
+  alternates: {
+    canonical: "/pricing",
+  },
   openGraph: {
     title: "Pricing | Vibellion Marketing",
     description: "Simple, transparent pricing for restaurants.",
@@ -23,22 +28,25 @@ export const metadata: Metadata = {
 
 export default function PricingPage() {
   const offer = siteContent.pricing.specialOffer;
-  
-  // Helper function to calculate discounted price
-  const getDiscountedPrice = (priceString: string): string => {
-    if (!offer.active || priceString === "Custom" || priceString.startsWith("Starting at")) {
-      return priceString;
-    }
-    const price = parseInt(priceString.replace(/[^0-9]/g, ""));
-    const discounted = Math.round(price * (1 - offer.discount / 100));
-    return `$${discounted.toLocaleString()}`;
+  const isOfferActive = isOfferCurrentlyActive(offer);
+  const pricingFaqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: siteContent.pricing.faq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   };
-
+  
   return (
     <div className="py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Special Offer Banner */}
-        {offer.active && (
+        {isOfferActive && (
           <div className="mb-12 p-6 bg-primary/20 border-2 border-primary rounded-lg text-center shadow-soft-lg">
             <div className="flex flex-col md:flex-row items-center justify-center gap-3 mb-3">
               <Badge className="bg-primary text-background text-base px-4 py-1.5 font-semibold">
@@ -50,6 +58,9 @@ export default function PricingPage() {
             </div>
             <p className="text-lg md:text-xl text-frost-white font-medium">
               {offer.description}
+            </p>
+            <p className="text-sm text-text/80 mt-2">
+              Includes: 4 promo cycles, content + posting, weekly tracking, and an end-of-month action plan.
             </p>
           </div>
         )}
@@ -64,78 +75,18 @@ export default function PricingPage() {
           </p>
         </div>
 
-        {/* Pricing Tiers */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {siteContent.pricing.tiers.map((tier) => {
-            const discountedPrice = getDiscountedPrice(tier.price);
-            const showDiscount = offer.active && discountedPrice !== tier.price && !tier.price.includes("Custom") && !tier.price.includes("Starting at");
-            
-            return (
-              <Card
-                key={tier.id}
-                className={`bg-surface border-border h-full flex flex-col ${
-                  tier.popular
-                    ? "border-primary border-2 shadow-soft-lg scale-105"
-                    : "hover:border-primary/50"
-                } transition-all`}
-              >
-                <div className="p-4 pb-0 flex items-start justify-between gap-2">
-                  {tier.popular && (
-                    <Badge className="bg-primary text-background">Most Popular</Badge>
-                  )}
-                  {showDiscount && (
-                    <Badge className="bg-secondary text-background font-semibold">
-                      {offer.discountText} Off
-                    </Badge>
-                  )}
-                </div>
-                <CardHeader>
-                  <CardTitle className="font-serif text-2xl text-primary">{tier.name}</CardTitle>
-                  <CardDescription className="text-frost-white/90">{tier.description}</CardDescription>
-                  <div className="mt-4">
-                    {showDiscount ? (
-                      <div className="space-y-1">
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-2xl font-serif font-bold text-frost-white/60 line-through">
-                            {tier.price}
-                          </span>
-                          <span className="text-4xl font-serif font-bold text-primary">
-                            {discountedPrice}
-                          </span>
-                          <span className="text-frost-white/80 ml-2">{tier.period}</span>
-                        </div>
-                        <p className="text-sm text-primary font-semibold">
-                          First month only • Then {tier.price}/{tier.period.replace("per ", "")}
-                        </p>
-                      </div>
-                    ) : (
-                      <>
-                        <span className="text-4xl font-serif font-bold text-frost-white">{tier.price}</span>
-                        <span className="text-frost-white/80 ml-2">{tier.period}</span>
-                      </>
-                    )}
-                  </div>
-                </CardHeader>
-              <CardContent className="flex-1 flex flex-col">
-                <ul className="space-y-3 mb-6 flex-1">
-                  {tier.features.map((feature, idx) => (
-                    <li key={idx} className="text-sm text-frost-white flex items-start">
-                      <span className="mr-2 text-frost-white">✓</span>
-                      <span className="text-frost-white">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button
-                  asChild
-                  variant={tier.popular ? "default" : "outline"}
-                  className={`w-full ${tier.popular ? "bg-primary text-background" : ""}`}
-                >
-                  <Link href="/contact">Get Started</Link>
-                </Button>
-              </CardContent>
-            </Card>
-            );
-          })}
+        <PricingTiers isOfferActive={isOfferActive} />
+
+        <div className="mb-16 rounded-xl border border-border bg-surface p-6 text-center">
+          <h2 className="text-2xl font-serif font-bold text-primary mb-2">Why restaurants trust us</h2>
+          <p className="text-text/80 max-w-2xl mx-auto mb-4">
+            Restaurant-only specialization, week-by-week promo planning, and month-to-month terms.
+          </p>
+          <Button asChild className="bg-primary text-background hover:bg-primary/90">
+            <a href={siteContent.contact.calendlyUrl} target="_blank" rel="noopener noreferrer">
+              {siteContent.brand.primaryCTA}
+            </a>
+          </Button>
         </div>
 
         {/* Add-Ons */}
@@ -178,6 +129,9 @@ export default function PricingPage() {
             ))}
           </Accordion>
         </div>
+        <Script id="pricing-faq-schema" type="application/ld+json">
+          {JSON.stringify(pricingFaqSchema)}
+        </Script>
       </div>
     </div>
   );

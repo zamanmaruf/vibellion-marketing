@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "About Us",
   description:
     "Learn about Vibellion Marketing - a restaurant-focused digital marketing agency dedicated to helping food businesses fill seats and build loyal customers.",
+  alternates: {
+    canonical: "/about",
+  },
   openGraph: {
     title: "About Us | Vibellion Marketing",
     description: "Learn about Vibellion Marketing and our mission.",

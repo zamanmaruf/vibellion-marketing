@@ -4,11 +4,13 @@ import { siteContent } from "@/content/siteContent";
 import { motion } from "framer-motion";
 
 export function SocialProof() {
+  const spotlight = siteContent.trust.testimonials[0];
+
   return (
     <section className="border-y border-border bg-surface py-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
           {siteContent.socialProof.stats.map((stat, index) => (
             <motion.div
               key={index}
@@ -27,6 +29,15 @@ export function SocialProof() {
             </motion.div>
           ))}
         </div>
+
+        {spotlight ? (
+          <div className="mx-auto max-w-3xl rounded-xl border border-border bg-background/40 p-6 text-center">
+            <p className="text-base text-text/90 md:text-lg">"{spotlight.quote}"</p>
+            <p className="mt-3 text-sm text-text/70">
+              {spotlight.author}, {spotlight.role} ({spotlight.businessType})
+            </p>
+          </div>
+        ) : null}
       </div>
     </section>
   );

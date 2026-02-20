@@ -30,6 +30,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${resource.title} | Vibellion Marketing`,
     description: resource.description,
+    alternates: {
+      canonical: `/resources/${resource.id}`,
+    },
     openGraph: {
       title: `${resource.title} | Vibellion Marketing`,
       description: resource.description,
@@ -219,13 +222,21 @@ export default async function ResourcePage({ params }: Props) {
               Ready to implement these strategies?
             </h3>
             <p className="text-frost-white mb-6">
-              Book your free social audit and let's discuss how we can help your restaurant grow.
+              Book a pilot fit call and let's discuss how we can help your restaurant grow.
             </p>
-            <Button asChild size="lg" className="bg-primary text-background hover:bg-primary/90">
-              <a href={siteContent.contact.calendlyUrl} target="_blank" rel="noopener noreferrer">
-                Book Free Social Audit
-              </a>
-            </Button>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Button asChild size="lg" className="bg-primary text-background hover:bg-primary/90">
+                <a href={siteContent.contact.calendlyUrl} target="_blank" rel="noopener noreferrer">
+                  {siteContent.brand.primaryCTA}
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link href="/services">Explore Services</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link href="/pricing">View Pricing</Link>
+              </Button>
+            </div>
           </div>
         </article>
       </div>
